@@ -1,0 +1,92 @@
+<div class="row">
+    <div class="col">
+        <hr>
+        <h4 style="text-align: center">Template Driven Form</h4>
+        <!-- {{tdfform.value | json}} -->
+        <hr>
+         <!-- {{tdfModel | json}} -->
+        <form #tdfform="ngForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="">User Name</label>
+                <input type="text" required #name="ngModel" class="form-control" [class.is-invalid]="name.invalid && name.touched"  name="username" id="" placeholder="Enter User Name" [(ngModel)]="tdfModel.name">
+                <small [class.d-none]="name.valid || name.untouched" class="text-danger form-text">Please enter your.</small>
+            </div>
+            <div class="form-group">
+            <label for="">Email address</label>
+            <input type="email" class="form-control" id="" name="email" placeholder="Enter email" [(ngModel)]="tdfModel.email">
+            <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+            </div>
+            <div class="form-group">
+               <label for="">Mobile</label>
+               <input type="tel" class="form-control" required #mobile="ngModel" id="" name="mobile" [class.is-invalid]="mobile.invalid && mobile.touched" pattern="^\d{10}$" placeholder="Mobile" [(ngModel)]="tdfModel.mobile">
+               <!-- <small [class.d-none]="mobile.valid || mobile.untouched" class="text-danger form-text">Please enter Mobile Number.</small>     -->
+               <div *ngIf="mobile.errors && (mobile.valid || mobile.touched)">
+                    <small *ngIf="mobile.errors.required" class="text-danger form-text">Please enter your Mobile number.</small>
+                    <small *ngIf="mobile.errors.pattern" class="text-danger form-text">Mobile number must be 10 digits.</small>
+               </div>
+            </div>
+            <div class="form-grop">
+                <label for="">Topic</label>
+                <select class="custom-select" (blur)="checSelectValue(topic.value)" multiple (change)="checSelectValue(topic.value)" #topic="ngModel" [class.is-invalid]="topicHasError && topic.touched" [(ngModel)]="tdfModel.topic" name="choice">
+                    <option value="default">Choose a topic</option>
+                    <option value="Angular" *ngFor="let topic of topics" value="{{topic}}">{{topic}}</option>
+                </select>
+                <small [class.d-none]="!topicHasError || topic.untouched" class="text-danger form-text">Please Choose a topic.</small>
+            </div> <br>
+            <div class="form-group">
+                  <input type="radio" name="shift" id="" [(ngModel)]="tdfModel.shift" value="morning"> Morning
+                  <input type="radio" name="shift" id="" [(ngModel)]="tdfModel.shift" value="evening"> Evening
+            </div>
+            <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="" [(ngModel)]="tdfModel.subscribe" name="subscribe">
+            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            </div>
+            <button [disabled]="tdfform.form.invalid || topicHasError" type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <div class="col">
+        <hr>
+        <h4 style="text-align: center">Reactive Form</h4>
+        <hr>
+        <form>
+                <div class="form-group">
+                    <label for="">User Name</label>
+                    <input type="text" class="form-control" id="" placeholder="Enter User Name">
+                    <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                </div>
+                <div class="form-group">
+                <label for="">Email address</label>
+                <input type="email" class="form-control" id="" placeholder="Enter email">
+                <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                </div>
+                <div class="form-group">
+                <label for="">Mobile</label>
+                <input type="tel" class="form-control" id="" placeholder="Mobile">
+                </div>
+                <div class="form-grop">
+                    <label for="">Choice</label>
+                    <select class="custom-select">
+                        <option selected>Open this select menu</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div> <br>
+                <div class="form-group">
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="" name="customRadio2" class="custom-control-input">
+                        <label class="custom-control-label">Morning</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="" name="customRadio2" class="custom-control-input">
+                        <label class="custom-control-label">Evening</label>
+                    </div>
+                </div>
+                <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>

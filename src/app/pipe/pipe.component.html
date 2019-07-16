@@ -1,0 +1,18 @@
+<h1>
+    Employee List of Vitessio
+</h1>
+<hr>
+<table border="1">
+    <tr>
+        <th>Sr</th>
+        <th>Name</th>
+        <th>Gender</th>
+        <th>Employee Id</th>
+    </tr>
+    <tr *ngFor="let emp of personList; let i = index;">
+        <td>{{i+1}}</td>
+        <td>{{emp.name | mypipe:emp.gender}}</td>
+        <td>{{emp.gender}}</td>
+        <td>{{emp.id}}</td>
+    </tr>
+</table>
