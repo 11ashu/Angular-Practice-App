@@ -1,6 +1,6 @@
-<h1>
+<!-- <h6>
     Employee List of Vitessio
-</h1>
+</h6>
 <hr>
 <table border="1">
     <tr>
@@ -15,4 +15,41 @@
         <td>{{emp.gender}}</td>
         <td>{{emp.id}}</td>
     </tr>
-</table>
+</table> -->
+<div class="col">
+    <hr>
+    <h4 style="text-align: center">Reactive Form with dynamic controls</h4>
+    <hr>
+    <form [formGroup]="demoform" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="">User Name</label>
+                <input type="text" class="form-control" id="" placeholder="Enter User Name" formControlName="user_name">
+            </div>
+            <button class="btn btn-primary" (click)="addEmail()" style="margin-bottom: 10px;">Add</button>
+            <div *ngFor="let email of getEmailsFormControls(); let i = index">
+                    <div class="form-group">
+                        <label for="">Email address {{i}}</label> &nbsp;
+                        <input type="email" class="form-control" id="" placeholder="Enter email" [formControl]="email">
+                        <a href="Javascript:void(0)" (click)="removeEmail(i)" class="float-right" *ngIf="showRemoveBtn">Remove</a>
+                    </div>
+            </div>
+            <div class="form-group">
+                <label for="">Mobile</label>
+                <input type="tel" class="form-control" id="" placeholder="Mobile" formControlName="mobile">
+            </div>
+            <div class="form-grop">
+                <label for="">Choice</label>
+                <select class="custom-select" formControlName="choice">
+                    <option selected>Open this select menu</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+            </div> <br>
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1" formControlName="subscribe">
+                <label class="form-check-label" for="exampleCheck1" >Check me out</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
